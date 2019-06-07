@@ -1,2 +1,27 @@
 ﻿body {
+    background-color: cornflowerblue;
+}
+
+#main {
+    display: flex;
+}
+
+#title {
+    background-color: white;
+    text-align: center;
+    width: 15%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+
+#buttons {
+    margin-left: 45%;
+    margin-top: 25%;
+    justify-content: center;
+}
+
+.button {
+    color: white;
 }
