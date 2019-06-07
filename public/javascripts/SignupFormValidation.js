@@ -10,12 +10,14 @@ function formIsValid(username, password, passwordReenter, email) {
     let formValidity = {};
     passwordCriteria(password, passwordReenter, formValidity);
 
+    //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
         return formValidity;
     }
 
     databaseCriteria(username, email, formValidity);
 
+    //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
         return formValidity;
     }
@@ -39,8 +41,6 @@ function passwordCriteria(password, passwordReenter, formValidity) {
     let digitCount = 0;
     let letterCount = 0;
     let specialCount = 0;
-    const digitRegex = ;
-    const specialRegex = ;
 
     for (let char in password) {
         //Check if letter
