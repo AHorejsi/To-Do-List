@@ -5,9 +5,9 @@ const mongodb = require("mongodb");
 
 const MongoClient = mongodb.MongoClient;
 
-function formIsValid(username, password1, password2, email) {
+function formIsValid(username, password, passwordReenter, email) {
     let formValidity = {};
-    passwordCriteria(password1, password2, formValidity);
+    passwordCriteria(password, passwordReenter, formValidity);
 
     if (!_.isEmpty(formValidity)) {
         return formValidity;
@@ -25,9 +25,9 @@ function formIsValid(username, password1, password2, email) {
     return formValidity;
 }
 
-function passwordCriteria(password1, password2, formValidity) {
+function passwordCriteria(password, passwordReenter, formValidity) {
     //Check if entered password is the same as re-entered password
-    if (password1 !== password2) {
+    if (password !== passwordReenter) {
         formValidity.message = "Entered password must be the same as re-entered password";
         formValidity.isValid = false;
 
@@ -41,7 +41,7 @@ function passwordCriteria(password1, password2, formValidity) {
     const digitRegex = ;
     const specialRegex = ;
 
-    for (let char in password1) {
+    for (let char in password) {
         //Check if letter
         let letterMatch = char.match(/[a-zA-Z]/);
 
@@ -80,3 +80,6 @@ function databaseCriteria(username, password, formValidity) {
     //Check database if username is already in use
     //Check database if email is already in use
 }
+
+
+module.exports = formIsValid;
