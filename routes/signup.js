@@ -2,7 +2,6 @@
 
 const express = require("express");
 const mongodb = require("mongodb");
-const User = require("../public/javascripts/User");
 const formIsValid = require("../public/javascripts/SignupFormValidation");
 
 
@@ -15,11 +14,11 @@ router.get("/", (request, response) => {
 
 router.post("/", (request, response) => {
     let username = request.params.username.trim();
-    let password1 = request.params.password1.trim();
-    let password2 = request.params.password2.trim();
+    let password = request.params.password.trim();
+    let passwordReenter = request.params.password2.trim();
     let email = request.params.email.trim();
 
-    let formValidity = formIsValid(username, password1, password2, email);
+    let formValidity = formIsValid(username, password, passwordReenter, email);
 
     if (formValidity.isValid) {
         //Add new user to database
