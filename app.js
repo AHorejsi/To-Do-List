@@ -33,10 +33,10 @@ app.use("/signup", signup);
 app.use("/users", users);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-    let err = new Error("Not Found");
-    err.status = 404;
-    next(err);
+app.use((request, response, next) => {
+    let error = new Error("Not Found");
+    error.status = 404;
+    next(error);
 });
 
 // development error handler
