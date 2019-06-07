@@ -1,6 +1,7 @@
 ﻿"use strict";
 
 const mongodb = require("mongodb");
+const _ = require("lodash");
 
 
 const MongoClient = mongodb.MongoClient;
