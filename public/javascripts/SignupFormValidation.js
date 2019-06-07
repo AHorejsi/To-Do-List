@@ -1,7 +1,6 @@
 ﻿"use strict";
 
 const mongodb = require("mongodb");
-const _ = require("lodash");
 
 
 const MongoClient = mongodb.MongoClient;
@@ -39,21 +38,36 @@ function passwordCriteria(password1, password2, formValidity) {
     let digitCount = 0;
     let letterCount = 0;
     let specialCount = 0;
+    const digitRegex = ;
+    const specialRegex = ;
 
-    _.forEach(password1, (char) => {
-        if (char.match(/[a-zA-Z]/)) {
+    for (let char in password1) {
+        //Check if letter
+        let letterMatch = char.match(/[a-zA-Z]/);
+
+        if (letterMatch.index === letterMatch.input) {
             letterCount++;
+            continue;
         }
 
-        if (char.match(/[0-9]/)) {
+        //Check if digit
+        let digitMatch = char.match(/[0-9]/);
+
+        if (digitMatch.index === digitMatch.input) {
             digitCount++;
+            continue;
         }
 
-        if (char.match(/[!|@|#|$|%|^|&|*|-|_|+|=|?|.]/)) {
+        //Check if special
+        let specialMatch = char.match(/[!|@|#|$|%|^|&|*|-|_|+|=|?|.]/);
+
+        if (specialMatch.index === specialMatch.input) {
             specialCount++;
+            continue;
         }
-    });
+    }
 
+    //Check if meets approriate criteria
     if (digitCount < 4 || letterCount < 4 || specialCount < 1) {
         formValidity.message = "Password must have at least 4 digits, 4 letters and one special character";
         formValidity.isValid = false;
