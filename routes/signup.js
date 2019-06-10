@@ -18,7 +18,8 @@ router.post("/", (request, response) => {
     const passwordReenter = request.body.passwordReenter.trim();
     const email = request.body.email.trim();
 
-    
+    console.log(request.body);
+    console.log(request.signupFormValidity);
 
     response.redirect("/");
 });

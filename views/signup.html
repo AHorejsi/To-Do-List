@@ -11,37 +11,38 @@
     <title>To Do List - Sign Up</title>
 </head>
 <body>
-    <h1 id="titleOfSignup">To Do List - Sign up</h1>
+    <h1 id="titleOfSignup" class="prompt">To Do List - Sign up</h1>
 
     <hr id="separator">
 
-    <div class="form-control">
+    <div class="container">
         <form action="/signup" method="post">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input class="form-control" name="username" type="text" placeholder="Enter Username">
+                <br />
+                <label class="prompt" for="username">Username:</label>
+                <input class="form-control" name="username" type="text" placeholder="Enter Username" required>
             </div>
 
             <br>
 
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input class="form-control" name="password" type="password" placeholder="Enter Password">
+                <label class="prompt" for="password">Password:</label>
+                <input class="form-control" name="password" type="password" placeholder="Enter Password" required>
 
-                <label for="passwordReenter">Re-enter Password:</label>
-                <input class="form-control" name="passwordReenter" type="password" placeholder="Re-enter Password">
+                <label class="prompt" for="passwordReenter">Re-enter Password:</label>
+                <input class="form-control" name="passwordReenter" type="password" placeholder="Re-enter Password" required>
             </div>
 
             <br>
 
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input class="form-control" name="email" type="email" placeholder="Enter email">
+                <label class="prompt" for="email">Email:</label>
+                <input class="form-control" name="email" type="email" placeholder="Enter email" required>
             </div>
 
             <br>
 
-            <input class="btn btn-primary" type="submit" value="Sign Up">
+            <input class="btn btn-success" type="submit" value="Sign Up">
         </form>
     </div>
 </body>

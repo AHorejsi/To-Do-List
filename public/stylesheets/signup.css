@@ -1,7 +1,15 @@
-﻿#titleOfSignup {
+﻿body {
+    background-color: cornflowerblue;
+}
+
+#titleOfSignup {
     text-align: center;
 }
 
 #separator {
     background-color: black;
+}
+
+.prompt {
+    color: white;
 }

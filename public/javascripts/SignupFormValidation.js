@@ -1,28 +1,32 @@
 ﻿"use strict";
 
-const mongodb = require("mongodb");
 const _ = require("lodash");
 
 
-const MongoClient = mongodb.MongoClient;
-
 function checkForm(request, response, next) {
-    let formValidity = formIsValid(request.body);
-    request.signupFormValidity = formValidity;
+    if (request.method === "POST") {
+        console.log("TEST3");
+        let formValidity = formIsValid(request.body.username.trim(),
+            request.body.password.trim(),
+            request.body.passwordReenter.trim(),
+            request.body.email.trim());
+        request.signupFormValidity = formValidity;
+    }
 
     next();
 }
 
-function formIsValid(requestBody) {
+function formIsValid(username, password, passwordReenter, email) {
     let formValidity = {};
-    passwordCriteria(requestBody.password, requestBody.passwordReenter, formValidity);
+    passwordCriteria(password, passwordReenter, formValidity);
+    console.log("TEST6");
 
     //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
         return formValidity;
     }
 
-    databaseCriteria(requestBody.username, requestBody.email, formValidity);
+    databaseCriteria(username, email, formValidity);
 
     //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
