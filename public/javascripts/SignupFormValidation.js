@@ -6,16 +6,23 @@ const _ = require("lodash");
 
 const MongoClient = mongodb.MongoClient;
 
-function formIsValid(username, password, passwordReenter, email) {
+function checkForm(request, response, next) {
+    let formValidity = formIsValid(request.body);
+    request.signupFormValidity = formValidity;
+
+    next();
+}
+
+function formIsValid(requestBody) {
     let formValidity = {};
-    passwordCriteria(password, passwordReenter, formValidity);
+    passwordCriteria(requestBody.password, requestBody.passwordReenter, formValidity);
 
     //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
         return formValidity;
     }
 
-    databaseCriteria(username, email, formValidity);
+    databaseCriteria(requestBody.username, requestBody.email, formValidity);
 
     //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
@@ -59,7 +66,7 @@ function passwordCriteria(password, passwordReenter, formValidity) {
             continue;
         }
 
-        //Check if special
+        //Check if special character
         let specialMatch = char.match(/[!|@|#|$|%|^|&|*|-|_|+|=|?|.]/);
 
         if (specialMatch.index === specialMatch.input) {
@@ -83,4 +90,4 @@ function databaseCriteria(username, password, formValidity) {
 }
 
 
-module.exports = formIsValid;
+module.exports = checkForm;

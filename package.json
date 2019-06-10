@@ -8,18 +8,17 @@
   },
   "description": "ToDoList",
   "author": {
-    "name": ""
+    "name": "Alex Horejsi"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
-    "cookie-parser": "^1.4.0",
+    "cookie-parser": "^1.4.4",
     "debug": "^2.2.0",
     "ejs": "^2.6.1",
     "express": "^4.14.0",
-    "morgan": "^1.7.0",
-    "serve-favicon": "^2.3.0"
+    "lodash": "^4.17.11",
+    "mongodb": "^3.2.7",
+    "morgan": "^1.7.0"
   },
-  "devDependencies": {
-    "nodemon": "^1.19.1"
-  }
+  "devDependencies": {}
 }
