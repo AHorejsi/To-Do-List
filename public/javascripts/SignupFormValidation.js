@@ -19,7 +19,6 @@ function checkForm(request, response, next) {
 function formIsValid(username, password, passwordReenter, email) {
     let formValidity = {};
     passwordCriteria(password, passwordReenter, formValidity);
-    console.log("TEST6");
 
     //If object is not empty, then invalid form submission
     if (!_.isEmpty(formValidity)) {
@@ -53,27 +52,22 @@ function passwordCriteria(password, passwordReenter, formValidity) {
     let letterCount = 0;
     let specialCount = 0;
 
-    for (let char in password) {
+    for (let char of password) {
         //Check if letter
-        let letterMatch = char.match(/[a-zA-Z]/);
-
-        if (letterMatch.index === letterMatch.input) {
+        if (/^[a-zA-Z]$/.test(char)) {
+            console.log("TEST6");
             letterCount++;
             continue;
         }
 
         //Check if digit
-        let digitMatch = char.match(/[0-9]/);
-
-        if (digitMatch.index === digitMatch.input) {
+        if (/^[0-9]$/.test(char)) {
             digitCount++;
             continue;
         }
 
         //Check if special character
-        let specialMatch = char.match(/[!|@|#|$|%|^|&|*|-|_|+|=|?|.]/);
-
-        if (specialMatch.index === specialMatch.input) {
+        if (/^[!|@|#|$|%|^|&|*|-|_|+|=|?|.]$/.test(char)) {
             specialCount++;
             continue;
         }

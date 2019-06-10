@@ -1,8 +1,8 @@
 ﻿"use strict";
 
 const express = require("express");
+const checkForm = require("../public/javascripts/signupFormValidation");
 const _ = require("lodash");
-const checkForm = require("../public/javascripts/SignupFormValidation");
 
 
 const router = express.Router();
