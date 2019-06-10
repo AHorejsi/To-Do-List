@@ -1,0 +1,91 @@
+﻿"use strict";
+
+const _ = require("lodash");
+
+
+function checkForm(request, response, next) {
+    if (request.method === "POST") {
+        console.log("TEST3");
+        let formValidity = formIsValid(request.body.username.trim(),
+            request.body.password.trim(),
+            request.body.passwordReenter.trim(),
+            request.body.email.trim());
+        request.signupFormValidity = formValidity;
+    }
+
+    next();
+}
+
+function formIsValid(username, password, passwordReenter, email) {
+    let formValidity = {};
+    passwordCriteria(password, passwordReenter, formValidity);
+
+    //If object is not empty, then invalid form submission
+    if (!_.isEmpty(formValidity)) {
+        return formValidity;
+    }
+
+    databaseCriteria(username, email, formValidity);
+
+    //If object is not empty, then invalid form submission
+    if (!_.isEmpty(formValidity)) {
+        return formValidity;
+    }
+
+    formValidity.message = "Success";
+    formValidity.isValid = true;
+
+    return formValidity;
+}
+
+function passwordCriteria(password, passwordReenter, formValidity) {
+    //Check if entered password is the same as re-entered password
+    if (password !== passwordReenter) {
+        formValidity.message = "Entered password must be the same as re-entered password";
+        formValidity.isValid = false;
+
+        return;
+    }
+
+    //Check if password meets required criteria
+    let digitCount = 0;
+    let letterCount = 0;
+    let specialCount = 0;
+
+    for (let char of password) {
+        //Check if letter
+        if (/^[a-zA-Z]$/.test(char)) {
+            console.log("TEST6");
+            letterCount++;
+            continue;
+        }
+
+        //Check if digit
+        if (/^[0-9]$/.test(char)) {
+            digitCount++;
+            continue;
+        }
+
+        //Check if special character
+        if (/^[!|@|#|$|%|^|&|*|-|_|+|=|?|.]$/.test(char)) {
+            specialCount++;
+            continue;
+        }
+    }
+
+    //Check if meets approriate criteria
+    if (digitCount < 4 || letterCount < 4 || specialCount < 1) {
+        formValidity.message = "Password must have at least 4 digits, 4 letters and one special character";
+        formValidity.isValid = false;
+
+        return;
+    }
+}
+
+function databaseCriteria(username, password, formValidity) {
+    //Check database if username is already in use
+    //Check database if email is already in use
+}
+
+
+module.exports = checkForm;
