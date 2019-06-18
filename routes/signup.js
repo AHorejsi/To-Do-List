@@ -2,7 +2,6 @@
 
 const express = require("express");
 const mongodb = require("mongodb");
-const $ = require("jquery");
 const _ = require("lodash");
 
 
@@ -10,7 +9,16 @@ const MongoClient = mongodb.MongoClient;
 const router = express.Router();
 
 router.get("/", (request, response) => {
-    response.render("signup");
+    let vars = {
+        username: request.cookies.username,
+        email: request.cookies.email,
+        usernameInUse: request.cookies.usernameInUse,
+        emailInUse: request.cookies.emailInUse,
+        passwordValidity: request.cookies.passwordValidity,
+        passwordMessage: request.cookies.passwordMessage
+    };
+
+    response.render("signup", vars);
 });
 
 router.post("/", (request, response) => {
@@ -19,7 +27,6 @@ router.post("/", (request, response) => {
             throw err;
         }
 
-        //Removing preceding and trailing whitespaces
         _.mapValues(request.body, _.trim);
 
         let database = db.db("database");
@@ -30,76 +37,83 @@ router.post("/", (request, response) => {
             ]
         };
 
-        database.collection("users").findOne(query).then((result) => {
-            if (!_.isEmpty(result)) {
-                response.render("signup");
+        database.collection("users").find(query).toArray().then((documents) => {
+            let formIsValid = true;
 
-                return;
+            if (!_.isEmpty(documents)) {
+                const usernameInUse = _.findIndex(documents, (doc) => doc.username === request.body.username) !== -1;
+                const emailInUse = _.findIndex(documents, (doc) => doc.email === request.body.email) !== -1;
+
+                response.cookie("usernameInUse", usernameInUse);
+                response.cookie("emailInUse", emailInUse);
+
+                if (usernameInUse || emailInUse) {
+                    formIsValid = false;
+                }
             }
 
-            let passwordValidity = {};
+            const passwordValidity = checkPasswordCriteria(request.body.password, request.body.passwordReenter);
+            response.cookie("passwordValidity", passwordValidity.isValid);
+            response.cookie("passwordMessage", passwordValidity.message);
 
-            checkPasswordCriteria(request.body.password, request.body.passwordReenter, passwordValidity);
-
-            if (!_.isEmpty(passwordValidity)) {
-                response.render("signup");
-
-                return;
+            if (!passwordValidity.isValid) {
+                formIsValid = false;
             }
 
-            //Add new user
-            let newUser = {
-                username: request.body.username,
-                password: request.body.password,
-                email: request.body.email
-            };
+            response.cookie("username", request.body.username);
+            response.cookie("email", request.body.email);
 
-            database.collection("users").insertOne(newUser);
+            if (formIsValid) {
+                response.clearCookie("usernameInUse");
+                response.clearCookie("emailInUse");
+                response.clearCookie("passwordValidity");
+                response.clearCookie("passwordMessage");
 
-            db.close();
-            response.redirect("/");
+                response.redirect("/");
+            }
+            else {
+                response.redirect("signup");
+            }
         }).catch((error) => {
             //Should not happen
             db.close();
+
             throw error;
         });
     });
 });
 
-function checkPasswordCriteria(password, passwordReenter, passwordValidity) {
-    //Check if both passwords match
+function checkPasswordCriteria(password, passwordReenter) {
+    let passwordValidity = {
+        message: "",
+        isValid: true
+    };
+
     if (password !== passwordReenter) {
-        passwordValidity.message = "Password mismatch";
+        passwordValidity.message += "Passwords do not match";
         passwordValidity.isValid = false;
-
-        return;
     }
 
-    //Check if password is long enough
     if (password.length < 9) {
-        passwordValidity.message = "Password too short";
+        passwordValidity.message += "<br>Password too short";
         passwordValidity.isValid = false;
     }
 
-    //Check if password has enough of each character type
     let digitCount = 0;
     let letterCount = 0;
     let specialCount = 0;
 
     for (let char of password) {
-        //Check if letter
         if (/^[a-zA-Z]$/.test(char)) {
             letterCount++;
             continue;
         }
 
-        //Check if digit
         if (/^[0-9]$/.test(char)) {
             digitCount++;
             continue;
         }
 
-        //Check if special character
         if (/^[!|@|#|$|%|^|&|*|-|_|+|=|?|.]$/.test(char)) {
             specialCount++;
             continue;
@@ -107,11 +121,11 @@ function checkPasswordCriteria(password, passwordReenter, passwordValidity) {
     }
 
     if (digitCount < 4 || letterCount < 4 || specialCount < 1) {
-        passwordValidity.message = "Password must have at least 4 digits, 4 letters and one special character";
+        passwordValidity.message += "<br>Password must have at least 4 digits, 4 letters and one special character";
         passwordValidity.isValid = false;
-
-        return;
     }
+
+    return passwordValidity;
 }
 
 

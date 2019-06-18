@@ -13,3 +13,8 @@
 .prompt {
     color: white;
 }
+
+.errorText {
+    color: rgb(175, 31, 0);
+    font-weight: bolder;
+}
