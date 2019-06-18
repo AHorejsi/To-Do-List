@@ -9,16 +9,14 @@ const MongoClient = mongodb.MongoClient;
 const router = express.Router();
 
 router.get("/", (request, response) => {
-    let vars = {
+    response.render("signup", {
         username: request.cookies.username,
         email: request.cookies.email,
         usernameInUse: request.cookies.usernameInUse,
         emailInUse: request.cookies.emailInUse,
         passwordValidity: request.cookies.passwordValidity,
         passwordMessage: request.cookies.passwordMessage
-    };
-
-    response.render("signup", vars);
+    });
 });
 
 router.post("/", (request, response) => {
