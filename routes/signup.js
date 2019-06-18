@@ -72,13 +72,11 @@ router.post("/", (request, response) => {
             else {
                 response.redirect("signup");
             }
-
-            db.close();
         }).catch((error) => {
             //Should not happen
-            db.close();
-
             throw error;
+        }).finally(() => {
+            db.close();
         });
     });
 });
