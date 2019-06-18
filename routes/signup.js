@@ -74,7 +74,7 @@ router.post("/", (request, response) => {
             }
         }).catch((error) => {
             //Should not happen
-            throw error;
+            response.render("error");
         }).finally(() => {
             db.close();
         });
