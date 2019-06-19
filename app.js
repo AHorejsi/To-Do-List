@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 
 const title = require("./routes/title");
-//const login = require("./routes/login");
+const login = require("./routes/login");
 const signup = require("./routes/signup");
 //const mainPage = require("./routes/mainPage");
 const users = require("./routes/users");
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", title);
-//app.use("/login", login);
+app.use("/login", login);
 app.use("/signup", signup);
 //app.use("/main", mainPage);
 app.use("/users", users);

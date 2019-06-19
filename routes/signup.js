@@ -22,7 +22,8 @@ router.get("/", (request, response) => {
 router.post("/", (request, response) => {
     MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true }, (err, db) => {
         if (err) {
-            throw err;
+            response.redirect("error");
+            return;
         }
 
         _.mapValues(request.body, _.trim);
@@ -67,14 +68,21 @@ router.post("/", (request, response) => {
                 response.clearCookie("passwordValidity");
                 response.clearCookie("passwordMessage");
 
+                let newUser = {
+                    username: request.body.username,
+                    password: request.body.password,
+                    email: request.body.email
+                };
+
+                database.collection("users").insertOne(newUser);
+
                 response.redirect("/");
             }
             else {
                 response.redirect("signup");
             }
         }).catch((error) => {
-            //Should not happen
-            response.render("error");
+            response.redirect("error");
         }).finally(() => {
             db.close();
         });
