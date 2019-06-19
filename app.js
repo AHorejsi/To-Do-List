@@ -12,8 +12,8 @@ const ejs = require("ejs");
 const title = require("./routes/title");
 const login = require("./routes/login");
 const signup = require("./routes/signup");
-//const mainPage = require("./routes/mainPage");
-const users = require("./routes/users");
+const mainPage = require("./routes/mainPage");
+const error = require("./routes/error");
 
 
 const app = express();
@@ -30,8 +30,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", title);
 app.use("/login", login);
 app.use("/signup", signup);
-//app.use("/main", mainPage);
-app.use("/users", users);
+app.use("/main", mainPage);
+app.use("/error", error);
 
 // catch 404 and forward to error handler
 app.use((request, response, next) => {
