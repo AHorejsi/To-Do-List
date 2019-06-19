@@ -12,18 +12,50 @@
     <title>To Do List - Login</title>
 </head>
 <body>
+    <h1 id="titleOfLogin" class="text">To Do List - Login</h1>
+
+    <hr id="separator">
+
     <div class="container">
         <form action="/login" method="post">
             <div class="form-group">
+                <label class="text" for="usernameOrEmail">Username:</label>
 
+                <% if (username === undefined) { %>
+                    <input id="usernameOrEmail" class="form-control" name="usernameOrEmail" type="text" placeholder="Enter Username" required>
+                <% } else { %>
+                    <input id="usernameOrEmail" class="form-control" name="usernameOrEmail" type="text" placeholder="Enter Username" value="<%= username %>" required>
+                <% } %>
             </div>
+
+            <br>
 
             <div class="form-group">
-
+                <label class="text" for="password">Password:</label>
+                <input id="password" class="form-control" name="password" type="password" placeholder="Enter Password" required>
             </div>
+
+            <br>
 
             <input class="btn btn-success" type="submit" value="Login">
         </form>
+
+        <% if (invalidLogin) { %>
+            <div class="errorText">
+                Invalid Login Info
+            </div>
+        <% } %>
+
+        <br>
+        <br>
+
+        <div id="signupPromptDiv" class="container">
+            <p id="signupPromptText">
+                Don't have an account?
+            </p>
+
+            <a id="signupLink" class="text" href="signup">Sign Up</a>
+        </div>
     </div>
 </body>
 </html>

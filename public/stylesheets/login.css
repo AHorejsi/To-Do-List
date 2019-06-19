@@ -5,3 +5,38 @@
 .text {
     color: white;
 }
+
+#titleOfLogin {
+    text-align: center;
+}
+
+#separator {
+    background-color: black;
+}
+
+#signupLink {
+    text-decoration: underline;
+}
+
+#signupPromptText {
+    color: yellow;
+}
+
+#signupPromptDiv {
+    border: 0.05em solid yellow;
+    display: inline-block;
+    width: 20%;
+    margin-top: 10em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    float: right;
+}
+
+a:hover {
+    color: rgb(211, 208, 207);
+}
+
+.errorText {
+    color: rgb(175, 31, 0);
+    font-weight: bolder;
+}
