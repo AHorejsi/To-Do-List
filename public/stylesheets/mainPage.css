@@ -1,3 +1,33 @@
 ﻿body {
     background-color: cornflowerblue;
 }
+
+.floatLeft {
+    float: left;
+}
+
+.text {
+    color: white;
+}
+
+.taskItem {
+    background-color: white;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.inputField {
+    flex: 1;
+    border-radius: 0.3em;
+}
+
+#newTaskInputField {
+    width: 85%;
+    height: 90%;
+}
+
+.buttons {
+    float: right;
+}

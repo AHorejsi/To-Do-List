@@ -1,12 +1,33 @@
 ﻿"use strict";
 
-
 const express = require("express");
-const router = express.Router();
+const mongodb = require("mongodb");
+const _ = require("lodash");
 
+
+const router = express.Router();
+const MongoClient = mongodb.MongoClient;
+const ObjectId = mongodb.ObjectId;
 
 router.get("/", (request, response) => {
-    response.render("mainPage");
+    MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true }, (err, db) => {
+        if (err) {
+            response.redirect("error");
+            return;
+        }
+
+        let database = db.db("database");
+
+        database.collection("tasks").find({ userId: ObjectId(request.cookies.userId) }).toArray().then((tasks) => {
+            response.render("mainPage", {
+                tasks
+            });
+        }).catch((error) => {
+            response.redirect("error");
+        }).finally(() => {
+            db.close();
+        });
+    });
 });
 
 

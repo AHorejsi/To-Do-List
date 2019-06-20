@@ -1,6 +1,5 @@
 ﻿"use strict";
 
-
 const debug = require("debug");
 const express = require("express");
 const path = require("path");
@@ -14,6 +13,9 @@ const login = require("./routes/login");
 const signup = require("./routes/signup");
 const mainPage = require("./routes/mainPage");
 const error = require("./routes/error");
+const addTask = require("./routes/addTask");
+const deleteTask = require("./routes/deleteTask");
+const editTask = require("./routes/editTask");
 
 
 const app = express();
@@ -30,8 +32,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", title);
 app.use("/login", login);
 app.use("/signup", signup);
-app.use("/main", mainPage);
+app.use("/mainPage", mainPage);
 app.use("/error", error);
+app.use("/addTask", addTask);
+app.use("/deleteTask", deleteTask);
+app.use("/editTask", editTask);
 
 // catch 404 and forward to error handler
 app.use((request, response, next) => {

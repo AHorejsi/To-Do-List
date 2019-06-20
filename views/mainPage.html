@@ -12,6 +12,31 @@
     <title>To Do List - Main</title>
 </head>
 <body>
+    <div class="container">
+        <div>
+            <% for (let task of tasks) { %>
+                <div>
+                    <form>
+                        <input name="taskText" type="text" value="<%= task.description %>">
 
+                        <div class="buttons">
+                            <button type="submit" formaction="/editTask?taskId=<%= task._id %>" formmethod="post">Edit</button>
+                            <button type="submit" formaction="/deleteTask?taskId=<%= task._id %>" formmethod="post">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+
+        <br>
+
+        <form class="flexContainer" action="/addTask" method="post" autocomplete="off">
+            <div class="container form-group">
+                <label class="text control-label" for="newTaskText">New Task:&nbsp;</label>
+                <input id="newTaskInputField" class="inputField" name="newTaskText" type="text" placeholder="Type new task" required>
+                <input class="btn-sm btn-success" type="submit" value="Add">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

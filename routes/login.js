@@ -43,23 +43,15 @@ router.post("/", (request, response) => {
                 response.redirect("login");
             }
             else {
-                const queryForTasks = {
-                    _id: user._id
-                };
+                response.cookie("userId", user._id.toString());
 
-                database.collection("tasks").find(queryForTasks).toArray().then((documents) => {
-                    response.cookie("tasks", documents);
-                    response.redirect("mainPage");
-                }).catch((error) => {
-                    response.redirect("error");
-                }).finally(() => {
-                    db.close();
-                });
+                response.redirect("mainPage");
+                db.close();
             }
         }).catch((error) => {
             response.redirect("error");
         }).finally(() => {
-            db.close();
+            db.close(); 
         });
     });
 });
