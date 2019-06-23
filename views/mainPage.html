@@ -19,10 +19,10 @@
                     <input type="text" name="description<%= task._id %>" value="<%= task.description %>">
 
                     <label class="text">Edit:</label>
-                    <input class="editOption" name="editTask<%= task._id %>" type="radio" value="edit">
+                    <input name="editTask<%= task._id %>" type="radio" value="edit">
 
                     <label class="text">Delete:</label>
-                    <input class="deleteOption" name="editTask<%= task._id %>" type="radio" value="delete">
+                    <input name="editTask<%= task._id %>" type="radio" value="delete">
                 </div>
             <% } %>
 
@@ -40,6 +40,10 @@
                 <input id="newTaskInputField" class="inputField" name="newTaskText" type="text" placeholder="Type new task" required>
                 <input class="btn-sm btn-success" type="submit" value="Add">
             </div>
+        </form>
+
+        <form action="/logout" method="get">
+            <input class="btn btn-warning" type="submit">
         </form>
     </div>
 </body>

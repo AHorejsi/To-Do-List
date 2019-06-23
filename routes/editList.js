@@ -20,15 +20,15 @@ router.post("/", (request, response) => {
         console.log(request.body);
 
         database.collection("tasks").find({ userId: ObjectId(request.cookies.userId) }).forEach((doc) => {
-            let elementToChange = request.body["editTask" + doc._id.toString()];
+            let changeType = request.body["editTask" + doc._id.toString()];
 
-            if (elementToChange === "edit") {
+            if (changeType === "edit") {
                 let query = { _id: doc._id };
                 let updateInfo = { $set: { description: request.body["description" + doc._id.toString()] } }
 
                 database.collection("tasks").updateOne(query, updateInfo);
             }
-            else if (elementToChange === "delete") {
+            else if (changeType === "delete") {
                 database.collection("tasks").deleteOne({ _id: doc._id });
             }
         }).then((result) => {

@@ -46,7 +46,10 @@ router.post("/", (request, response) => {
                 response.cookie("userId", user._id.toString());
 
                 response.redirect("mainPage");
-                db.close();
+
+                response.clearCookie("username");
+                response.clearCookie("email");
+                response.clearCookie("invalidLogin");
             }
         }).catch((error) => {
             response.redirect("error");
