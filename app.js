@@ -14,8 +14,7 @@ const signup = require("./routes/signup");
 const mainPage = require("./routes/mainPage");
 const error = require("./routes/error");
 const addTask = require("./routes/addTask");
-const deleteTask = require("./routes/deleteTask");
-const editTask = require("./routes/editTask");
+const editList = require("./routes/editList");
 
 
 const app = express();
@@ -35,8 +34,7 @@ app.use("/signup", signup);
 app.use("/mainPage", mainPage);
 app.use("/error", error);
 app.use("/addTask", addTask);
-app.use("/deleteTask", deleteTask);
-app.use("/editTask", editTask);
+app.use("/editList", editList);
 
 // catch 404 and forward to error handler
 app.use((request, response, next) => {

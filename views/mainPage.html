@@ -13,20 +13,24 @@
 </head>
 <body>
     <div class="container">
-        <div>
+        <form action="/editList" method="post" autocomplete="off">
             <% for (let task of tasks) { %>
-                <div>
-                    <form>
-                        <input name="taskText" type="text" value="<%= task.description %>">
+                <div class="form-horizontal">
+                    <input type="text" name="description<%= task._id %>" value="<%= task.description %>">
 
-                        <div class="buttons">
-                            <button type="submit" formaction="/editTask?taskId=<%= task._id %>" formmethod="post">Edit</button>
-                            <button type="submit" formaction="/deleteTask?taskId=<%= task._id %>" formmethod="post">Delete</button>
-                        </div>
-                    </form>
+                    <label class="text">Edit:</label>
+                    <input class="editOption" name="editTask<%= task._id %>" type="radio" value="edit">
+
+                    <label class="text">Delete:</label>
+                    <input class="deleteOption" name="editTask<%= task._id %>" type="radio" value="delete">
                 </div>
             <% } %>
-        </div>
+
+            <br>
+            <br>
+
+            <input class="btn btn-secondary" type="submit" value="Implement Edits">
+        </form>
 
         <br>
 
