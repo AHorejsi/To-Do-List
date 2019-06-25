@@ -46,9 +46,18 @@
             </div>
         </form>
 
-        <form action="/logout" method="get">
-            <input class="btn btn-warning" type="submit" value="Log out">
-        </form>
+        <br>
+        <br>
+
+        <div>
+            <form class="lowerButtons" action="/logout" method="get">
+                <input class="btn btn-warning" type="submit" value="Log out">
+            </form>
+
+            <form class="lowerButtons" action="/deleteUser" method="post">
+                <input class="btn btn-danger" type="submit" value="Delete Account">
+            </form>
+        </div>
     </div>
 </body>
 </html>

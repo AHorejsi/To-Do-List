@@ -16,6 +16,7 @@ const error = require("./routes/error");
 const addTask = require("./routes/addTask");
 const editList = require("./routes/editList");
 const logout = require("./routes/logout");
+const deleteUser = require("./routes/deleteUser");
 
 
 const app = express();
@@ -37,6 +38,7 @@ app.use("/error", error);
 app.use("/addTask", addTask);
 app.use("/editList", editList);
 app.use("/logout", logout);
+app.use("/deleteUser", deleteUser);
 
 // catch 404 and forward to error handler
 app.use((request, response, next) => {

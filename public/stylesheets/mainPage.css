@@ -39,3 +39,7 @@
 #titleOfMain {
     text-align: center;
 }
+
+.lowerButtons {
+    display: inline-block;
+}
