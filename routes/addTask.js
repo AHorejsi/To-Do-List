@@ -23,10 +23,18 @@ router.post("/", (request, response) => {
         database.collection("tasks").insertOne({
             userId: ObjectId(request.cookies.userId),
             description: request.body.newTaskText
+        }).then((outcome) => {
+            if (outcome.result.ok === 1) {
+                response.redirect("mainPage");
+            }
+            else {
+                response.redirect("error");
+            }
+        }).catch((error) => {
+            response.redirect("error");
+        }).finally(() => {
+            db.close();
         });
-
-        response.redirect("mainPage");
-        db.close();
     });
 });
 

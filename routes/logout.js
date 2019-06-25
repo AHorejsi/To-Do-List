@@ -8,7 +8,9 @@ const router = express.Router();
 router.get("/", (request, response) => {
     response.clearCookie("userId");
     response.clearCookie("tasks");
-    console.log(request.cookies);
+    response.clearCookie("username");
+    response.clearCookie("email");
+
     response.redirect("/");
 });
 

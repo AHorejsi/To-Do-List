@@ -12,6 +12,10 @@
     <title>To Do List - Main</title>
 </head>
 <body>
+    <h1 id="titleOfMain" class="text">To Do List - Main</h1>
+
+    <hr id="separator">
+
     <div class="container">
         <form action="/editList" method="post" autocomplete="off">
             <% for (let task of tasks) { %>
@@ -43,7 +47,7 @@
         </form>
 
         <form action="/logout" method="get">
-            <input class="btn btn-warning" type="submit">
+            <input class="btn btn-warning" type="submit" value="Log out">
         </form>
     </div>
 </body>

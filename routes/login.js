@@ -43,13 +43,13 @@ router.post("/", (request, response) => {
                 response.redirect("login");
             }
             else {
+                response.clearCookie("invalidLogin");
+                response.clearCookie("username");
+                response.clearCookie("email");
+
                 response.cookie("userId", user._id.toString());
 
                 response.redirect("mainPage");
-
-                response.clearCookie("username");
-                response.clearCookie("email");
-                response.clearCookie("invalidLogin");
             }
         }).catch((error) => {
             response.redirect("error");

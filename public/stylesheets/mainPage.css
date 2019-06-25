@@ -31,3 +31,11 @@
 .buttons {
     float: right;
 }
+
+#separator {
+    background-color: black;
+}
+
+#titleOfMain {
+    text-align: center;
+}
