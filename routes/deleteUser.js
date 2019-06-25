@@ -15,9 +15,7 @@ router.post("/", (request, response) => {
             return;
         }
 
-        let database = db.db("database");
-
-        database.collection("users").deleteOne({ _id: ObjectId(request.cookies.userId) }).then((outcome) => {
+        db.db("database").collection("users").deleteOne({ _id: ObjectId(request.cookies.userId) }).then((outcome) => {
             response.redirect("/");
         }).catch((error) => {
             response.redirect("error");
