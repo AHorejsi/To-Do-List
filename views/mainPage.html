@@ -20,7 +20,7 @@
         <form action="/editList" method="post" autocomplete="off">
             <% for (let task of tasks) { %>
                 <div class="form-horizontal">
-                    <input type="text" name="description<%= task._id %>" value="<%= task.description %>">
+                    <input class="form-control" type="text" name="description<%= task._id %>" value="<%= task.description %>">
 
                     <label class="text">Edit:</label>
                     <input name="editTask<%= task._id %>" type="radio" value="edit">
@@ -38,10 +38,10 @@
 
         <br>
 
-        <form class="flexContainer" action="/addTask" method="post" autocomplete="off">
-            <div class="container form-group">
+        <form action="/addTask" method="post" autocomplete="off">
+            <div class="form-group">
                 <label class="text control-label" for="newTaskText">New Task:&nbsp;</label>
-                <input id="newTaskInputField" class="inputField" name="newTaskText" type="text" placeholder="Type new task" required>
+                <input name="newTaskText" type="text" placeholder="Type new task" required>
                 <input class="btn-sm btn-success" type="submit" value="Add">
             </div>
         </form>
