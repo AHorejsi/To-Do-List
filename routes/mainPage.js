@@ -10,7 +10,7 @@ const ObjectId = mongodb.ObjectId;
 
 router.get("/", (request, response) => {
     MongoClient.connect("mongodb://localhost:27017/", { useNewUrlParser: true }, (err, db) => {
-        if (err) {
+        if (err || request.cookies.userId === undefined) {
             response.redirect("error");
             return;
         }

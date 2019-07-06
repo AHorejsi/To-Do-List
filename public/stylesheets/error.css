@@ -1,2 +1,8 @@
 ﻿body {
+    background-color: cornflowerblue;
+}
+
+.text {
+    color: red;
+    text-align: center;
 }
