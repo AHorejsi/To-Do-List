@@ -17,8 +17,6 @@ router.post("/", (request, response) => {
 
         let database = db.db("database");
 
-        console.log(request.body);
-
         database.collection("tasks").find({ userId: ObjectId(request.cookies.userId) }).forEach((doc) => {
             let changeType = request.body["editTask" + doc._id.toString()];
 
