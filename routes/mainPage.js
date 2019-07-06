@@ -15,11 +15,12 @@ router.get("/", (request, response) => {
             return;
         }
 
-        let database = db.db("database");
+        const database = db.db("database");
 
         database.collection("tasks").find({ userId: ObjectId(request.cookies.userId) }).toArray().then((tasks) => {
             response.render("mainPage", {
-                tasks
+                tasks,
+                username: request.cookies.username
             });
         }).catch((error) => {
             response.redirect("error");

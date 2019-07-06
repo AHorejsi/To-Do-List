@@ -68,7 +68,7 @@ router.post("/", (request, response) => {
                 response.clearCookie("passwordValidity");
                 response.clearCookie("passwordMessage");
 
-                let newUser = {
+                const newUser = {
                     username: request.body.username,
                     password: request.body.password,
                     email: request.body.email

@@ -18,7 +18,7 @@ router.post("/", (request, response) => {
 
         _.mapValues(request.body, _.trim);
 
-        let database = db.db("database");
+        const database = db.db("database");
 
         database.collection("tasks").insertOne({
             userId: ObjectId(request.cookies.userId),

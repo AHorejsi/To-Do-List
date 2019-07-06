@@ -12,51 +12,80 @@
     <title>To Do List - Main</title>
 </head>
 <body>
-    <h1 id="titleOfMain" class="text">To Do List - Main</h1>
+    <h1 id="titleOfMain" class="text">To Do List - <%= username %></h1>
 
     <hr id="separator">
 
-    <div class="container">
-        <form action="/editList" method="post" autocomplete="off">
-            <% for (let task of tasks) { %>
-                <div class="form-horizontal">
-                    <input class="form-control" type="text" name="description<%= task._id %>" value="<%= task.description %>">
+    <div id="mainDiv" class="container">
+        <div class="whiteBordered">
+            <form action="/editList" method="post" autocomplete="off">
+                <h1 class="text title">
+                    To-Do List:
+                </h1>
 
-                    <label class="text">Edit:</label>
-                    <input name="editTask<%= task._id %>" type="radio" value="edit">
+                <br>
+                <br>
 
-                    <label class="text">Delete:</label>
-                    <input name="editTask<%= task._id %>" type="radio" value="delete">
-                </div>
-            <% } %>
+                <% for (let task of tasks) { %>
+                    <div class="form-horizontal">
+                        <input class="form-control" type="text" name="description<%= task._id %>" value="<%= task.description %>">
 
-            <br>
-            <br>
+                        <label class="text">Edit:</label>
+                        <input name="task<%= task._id %>" type="radio" value="edit">
 
-            <input class="btn btn-secondary" type="submit" value="Implement Edits">
-        </form>
+                        <label class="text">Delete:</label>
+                        <input name="task<%= task._id %>" type="radio" value="delete">
+                    </div>
+                <% } %>
+
+                <br>
+                <br>
+
+                <input class="btn btn-secondary" type="submit" value="Implement Edits">
+            </form>
+        </div>
 
         <br>
 
-        <form action="/addTask" method="post" autocomplete="off">
-            <div class="form-group">
-                <label class="text control-label" for="newTaskText">New Task:&nbsp;</label>
-                <input name="newTaskText" type="text" placeholder="Type new task" required>
-                <input class="btn-sm btn-success" type="submit" value="Add">
-            </div>
-        </form>
+        <div class="whiteBordered">
+            <form action="/addTask" method="post" autocomplete="off">
+                <h1 class="text title">
+                    Add new Task:
+                </h1>
+
+                <br>
+                <br>
+
+                <div class="form-group">
+                    <input class="form-control" name="newTaskText" type="text" placeholder="Type new task" required>
+
+                    <br>
+
+                    <input class="btn btn-success" type="submit" value="Add">
+                </div>
+            </form>
+        </div>
 
         <br>
         <br>
 
         <div>
-            <form class="lowerButtons" action="/logout" method="get">
-                <input class="btn btn-warning" type="submit" value="Log out">
-            </form>
+            <div class="whiteBordered">
+                <h1 class="text title">
+                    Settings:
+                </h1>
 
-            <form class="lowerButtons" action="/deleteUser" method="post">
-                <input class="btn btn-danger" type="submit" value="Delete Account">
-            </form>
+                <br>
+                <br>
+
+                <form class="lowerButtons" action="/logout" method="get">
+                    <input class="btn btn-warning" type="submit" value="Log out">
+                </form>
+
+                <form class="lowerButtons" action="/deleteUser" method="post">
+                    <input class="btn btn-danger" type="submit" value="Delete Account">
+                </form>
+            </div>
         </div>
     </div>
 </body>

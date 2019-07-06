@@ -24,7 +24,7 @@ router.post("/", (request, response) => {
 
         _.mapValues(request.body, _.trim);
 
-        let database = db.db("database");
+        const database = db.db("database");
         const query = {
             $and: [
                 {
@@ -44,10 +44,10 @@ router.post("/", (request, response) => {
             }
             else {
                 response.clearCookie("invalidLogin");
-                response.clearCookie("username");
                 response.clearCookie("email");
 
                 response.cookie("userId", user._id.toString());
+                response.cookie("username", user.username);
 
                 response.redirect("mainPage");
             }

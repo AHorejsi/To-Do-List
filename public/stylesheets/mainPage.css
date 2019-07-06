@@ -10,6 +10,10 @@
     color: white;
 }
 
+.title {
+    text-decoration: underline;
+}
+
 .taskItem {
     background-color: white;
 }
@@ -42,4 +46,13 @@
 
 .lowerButtons {
     display: inline-block;
+}
+
+.whiteBordered {
+    border: 0.05em solid white;
+    padding: 1% 5% 1% 5%;
+}
+
+#mainDiv {
+    margin-bottom: 1%;
 }
